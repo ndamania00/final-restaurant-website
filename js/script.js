@@ -14,11 +14,19 @@ $(function () { // Same as document.addEventListener("DOMContentLoaded"...
 var dc = {};
 
 var homeHtmlUrl = "snippets/home-snippet.html";
+<<<<<<< HEAD
 var allCategoriesUrl =
   "https://davids-restaurant.herokuapp.com/categories.json";
 var categoriesTitleHtml = "snippets/categories-title-snippet.html";
 var categoryHtml = "snippets/category-snippet.html";
 var menuItemsUrl =
+=======
+var allCategoriesUrl = 
+  "https://davids-restaurant.herokuapp.com/categories.json";
+var categoriesTitleHtml = "snippets/categories-title-snippet.html";
+var categoryHtml = "snippets/category-snippet.html";
+var menuItemsUrl = 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
   "https://davids-restaurant.herokuapp.com/menu_items.json?category=";
 var menuItemsTitleHtml = "snippets/menu-items-title.html";
 var menuItemHtml = "snippets/menu-item.html";
@@ -36,14 +44,23 @@ var showLoading = function (selector) {
   insertHtml(selector, html);
 };
 
+<<<<<<< HEAD
 // Return substitute of '{{propName}}'
 // with propValue in given 'string'
+=======
+// Return substitute of '{{propName}}' 
+// with propValue in given 'string' 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
 var insertProperty = function (string, propName, propValue) {
   var propToReplace = "{{" + propName + "}}";
   string = string
     .replace(new RegExp(propToReplace, "g"), propValue);
   return string;
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
 
 // Remove the class 'active' from home and switch to Menu button
 var switchMenuToActive = function () {
@@ -54,7 +71,11 @@ var switchMenuToActive = function () {
 
   // Add 'active' to menu button if not already there
   classes = document.querySelector("#navMenuButton").className;
+<<<<<<< HEAD
   if (classes.indexOf("active") === -1) {
+=======
+  if (classes.indexOf("active") == -1) {
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
     classes += " active";
     document.querySelector("#navMenuButton").className = classes;
   }
@@ -62,11 +83,19 @@ var switchMenuToActive = function () {
 
 // On page load (before images or CSS)
 document.addEventListener("DOMContentLoaded", function (event) {
+<<<<<<< HEAD
 
 // TODO: STEP 0: Look over the code from
 // *** start ***
 // to
 // *** finish ***
+=======
+  
+// TODO: STEP 0: Look over the code from 
+// *** start *** 
+// to 
+// *** finish *** 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
 // below.
 // We changed this code to retrieve all categories from the server instead of
 // simply requesting home HTML snippet. We now also have another function
@@ -75,11 +104,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // random category into the home HTML snippet, and then insert that snippet into our
 // main page (index.html).
 //
+<<<<<<< HEAD
 // TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML,
+=======
+// TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML, 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
 // so it can be called when server responds with the categories data.
 
 // *** start ***
 // On first load, show home view
+<<<<<<< HEAD
 
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
@@ -96,13 +130,36 @@ function buildAndShowHomeHTML (categories) {
 
   // Load home snippet page
   $ajaxUtils.sendGetRequest(homeHtmlUrl,
+=======
+showLoading("#main-content");
+$ajaxUtils.sendGetRequest(
+  allCategoriesUrl, 
+  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  true); // Explicitely setting the flag to get JSON from server processed into an object literal
+});
+// *** finish **
+
+
+// Builds HTML for the home page based on categories array
+// returned from the server.
+function buildAndShowHomeHTML (categories) {
+  
+  // Load home snippet page
+  $ajaxUtils.sendGetRequest(
+    homeHtmlUrl,
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
     function (homeHtml) {
 
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
+<<<<<<< HEAD
       var chosenCategoryShortName =  chooseRandomCategory(categories).short_name;
 
+=======
+      
+      var chosenCategoryShortName = chooseRandomCategory(categories).short_name;      
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
       // chosen category from STEP 2. Use existing insertProperty function for that purpose.
@@ -115,6 +172,7 @@ function buildAndShowHomeHTML (categories) {
       // Hint: you need to surround the chosen category short name with something before inserting
       // it into the home html snippet.
       //
+<<<<<<< HEAD
       chosenCategoryShortName=  chosenCategoryShortName  ;
        var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml , "randomCategoryShortName", chosenCategoryShortName);
 
@@ -126,6 +184,19 @@ function buildAndShowHomeHTML (categories) {
       // of how to do that.
       insertHtml("#main-content",homeHtmlToInsertIntoMainPage);
 
+=======
+
+      chosenCategoryShortName = "'" + chosenCategoryShortName + "'";
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
+      
+
+      // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
+      // Use the existing insertHtml function for that purpose. Look through this code for an example
+      // of how to do that. 
+      // ....
+
+      insertHtml("#main-content", homeHtmlToInsertIntoMainPage);      
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
 }
@@ -174,8 +245,13 @@ function buildAndShowCategoriesHTML (categories) {
           // Switch CSS class active to menu button
           switchMenuToActive();
 
+<<<<<<< HEAD
           var categoriesViewHtml =
             buildCategoriesViewHtml(categories,
+=======
+          var categoriesViewHtml = 
+            buildCategoriesViewHtml(categories, 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
                                     categoriesTitleHtml,
                                     categoryHtml);
           insertHtml("#main-content", categoriesViewHtml);
@@ -188,10 +264,17 @@ function buildAndShowCategoriesHTML (categories) {
 
 // Using categories data and snippets html
 // build categories view HTML to be inserted into page
+<<<<<<< HEAD
 function buildCategoriesViewHtml(categories,
                                  categoriesTitleHtml,
                                  categoryHtml) {
 
+=======
+function buildCategoriesViewHtml(categories, 
+                                 categoriesTitleHtml,
+                                 categoryHtml) {
+  
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
   var finalHtml = categoriesTitleHtml;
   finalHtml += "<section class='row'>";
 
@@ -201,10 +284,17 @@ function buildCategoriesViewHtml(categories,
     var html = categoryHtml;
     var name = "" + categories[i].name;
     var short_name = categories[i].short_name;
+<<<<<<< HEAD
     html =
       insertProperty(html, "name", name);
     html =
       insertProperty(html,
+=======
+    html = 
+      insertProperty(html, "name", name);
+    html = 
+      insertProperty(html, 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
                      "short_name",
                      short_name);
     finalHtml += html;
@@ -229,9 +319,15 @@ function buildAndShowMenuItemsHTML (categoryMenuItems) {
         function (menuItemHtml) {
           // Switch CSS class active to menu button
           switchMenuToActive();
+<<<<<<< HEAD
 
           var menuItemsViewHtml =
             buildMenuItemsViewHtml(categoryMenuItems,
+=======
+          
+          var menuItemsViewHtml = 
+            buildMenuItemsViewHtml(categoryMenuItems, 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
                                    menuItemsTitleHtml,
                                    menuItemHtml);
           insertHtml("#main-content", menuItemsViewHtml);
@@ -244,6 +340,7 @@ function buildAndShowMenuItemsHTML (categoryMenuItems) {
 
 // Using category and menu items data and snippets html
 // build menu items view HTML to be inserted into page
+<<<<<<< HEAD
 function buildMenuItemsViewHtml(categoryMenuItems,
                                 menuItemsTitleHtml,
                                 menuItemHtml) {
@@ -253,6 +350,17 @@ function buildMenuItemsViewHtml(categoryMenuItems,
                    "name",
                    categoryMenuItems.category.name);
   menuItemsTitleHtml =
+=======
+function buildMenuItemsViewHtml(categoryMenuItems, 
+                                menuItemsTitleHtml,
+                                menuItemHtml) {
+  
+  menuItemsTitleHtml = 
+    insertProperty(menuItemsTitleHtml,
+                   "name",
+                   categoryMenuItems.category.name);
+  menuItemsTitleHtml = 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
     insertProperty(menuItemsTitleHtml,
                    "special_instructions",
                    categoryMenuItems.category.special_instructions);
@@ -266,21 +374,36 @@ function buildMenuItemsViewHtml(categoryMenuItems,
   for (var i = 0; i < menuItems.length; i++) {
     // Insert menu item values
     var html = menuItemHtml;
+<<<<<<< HEAD
     html =
       insertProperty(html, "short_name", menuItems[i].short_name);
     html =
       insertProperty(html,
+=======
+    html = 
+      insertProperty(html, "short_name", menuItems[i].short_name);
+    html = 
+      insertProperty(html, 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
                      "catShortName",
                      catShortName);
     html =
       insertItemPrice(html,
                       "price_small",
+<<<<<<< HEAD
                       menuItems[i].price_small);
+=======
+                      menuItems[i].price_small); 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
     html =
       insertItemPortionName(html,
                             "small_portion_name",
                             menuItems[i].small_portion_name);
+<<<<<<< HEAD
     html =
+=======
+    html = 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
       insertItemPrice(html,
                       "price_large",
                       menuItems[i].price_large);
@@ -288,18 +411,32 @@ function buildMenuItemsViewHtml(categoryMenuItems,
       insertItemPortionName(html,
                             "large_portion_name",
                             menuItems[i].large_portion_name);
+<<<<<<< HEAD
     html =
       insertProperty(html,
                      "name",
                      menuItems[i].name);
     html =
       insertProperty(html,
+=======
+    html = 
+      insertProperty(html, 
+                     "name",
+                     menuItems[i].name);
+    html = 
+      insertProperty(html, 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
                      "description",
                      menuItems[i].description);
 
     // Add clearfix after every second menu item
+<<<<<<< HEAD
     if (i % 2 !== 0) {
       html +=
+=======
+    if (i % 2 != 0) {
+      html += 
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
         "<div class='clearfix visible-lg-block visible-md-block'></div>";
     }
 
@@ -317,7 +454,11 @@ function insertItemPrice(html,
                          priceValue) {
   // If not specified, replace with empty string
   if (!priceValue) {
+<<<<<<< HEAD
     return insertProperty(html, pricePropName, "");
+=======
+    return insertProperty(html, pricePropName, "");;
+>>>>>>> 8fe9ec33d3e2785d95c244c41e9a80a9b6043970
   }
 
   priceValue = "$" + priceValue.toFixed(2);
