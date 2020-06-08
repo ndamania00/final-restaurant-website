@@ -38,7 +38,7 @@ var showLoading = function (selector) {
 
 // Return substitute of '{{propName}}'
 // with propValue in given 'string'
-var insertProperty = function (string, propName, propValue) {
+  var insertProperty = function (string, propName, propValue) {
   var propToReplace = "{{" + propName + "}}";
   string = string
     .replace(new RegExp(propToReplace, "g"), propValue);
@@ -97,16 +97,14 @@ function buildAndShowHomeHTML (categories) {
   $ajaxUtils.sendGetRequest(
     homeHtmlUrl,
     function (homeHtml) {
-      var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
-      var homeHtmlToInsertIntoMainPage = "'"+ chosenCategoryShortName + "'";
-      homeHtml = insertProperty(homeHtml,"randomCategoryShortName",homeHtmlToInsertIntoMainPage);
-      insertHtml("#main-content",homeHtml);
+
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
-      // var chosenCategoryShortName = ....
-
-
+       var chosenCategoryShortName = chooseRandomCategory(categories);
+       chosenCategoryShortName = chosenCategoryShortName.short_name;
+       chosenCategoryShortName = "'" + chosenCategoryShortName + "'";
+       
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
       // chosen category from STEP 2. Use existing insertProperty function for that purpose.
       // Look through this code for an example of how to do use the insertProperty function.
@@ -118,8 +116,15 @@ function buildAndShowHomeHTML (categories) {
       // Hint: you need to surround the chosen category short name with something before inserting
       // it into the home html snippet.
       //
-      // var homeHtmlToInsertIntoMainPage = ....
+      //  ....
+      	var homeHtmlToInsertIntoMainPage = homeHtml;
+        homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlToInsertIntoMainPage,
+                     "randomCategoryShortName",
+                     chosenCategoryShortName);
+   
 
+        document.querySelector("#main-content")
+        .innerHTML = homeHtmlToInsertIntoMainPage;
 
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
